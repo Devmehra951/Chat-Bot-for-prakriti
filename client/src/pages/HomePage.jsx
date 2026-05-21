@@ -1,0 +1,3 @@
+import { motion } from 'framer-motion';
+const features=['Climate change education','Pollution reduction tips','Biodiversity knowledge','Sustainable lifestyle guidance'];
+export default function HomePage(){return <div className='space-y-8'><motion.section initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} className='glass p-8 rounded-2xl'><h1 className='text-4xl font-bold'>Chat Bot for Prakriti</h1><p className='mt-3'>AI-powered environmental learning platform.</p></motion.section><section className='grid md:grid-cols-2 gap-4'>{features.map(f=><div key={f} className='glass rounded-xl p-4'>{f}</div>)}</section></div>;}

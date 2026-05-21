@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-br from-emerald-50 to-lime-100 text-slate-800 dark:from-slate-900 dark:to-slate-800 dark:text-slate-100 min-h-screen;
+}
+.glass { @apply bg-white/60 dark:bg-slate-900/50 backdrop-blur-lg border border-white/30 dark:border-slate-700 shadow-glass; }
