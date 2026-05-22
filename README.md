@@ -121,3 +121,6 @@ Common responses:
 - `401 Unauthorized: token missing` → login again.
 - `401 Unauthorized: invalid or expired token` → logout/login.
 - `OPENAI_API_KEY is missing...` → add key to `server/.env` and restart.
+
+- `429 OpenAI quota exceeded...` → add billing/credits in OpenAI dashboard and retry.
+- `401 OpenAI API key is invalid...` → replace key in `server/.env` and restart server.
