@@ -1,0 +1,1 @@
+export default function AboutPage(){return <div className='glass p-6 rounded-xl'><h2 className='text-2xl font-semibold mb-3'>About</h2><p>This platform helps users understand climate, sustainability, wildlife, and eco habits with trustworthy AI guidance.</p></div>;}
