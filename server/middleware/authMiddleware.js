@@ -1,3 +1,25 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-export const protect = async (req,res,next)=>{const token=req.headers.authorization?.split(' ')[1];if(!token)return res.status(401).json({message:'Unauthorized'});const decoded=jwt.verify(token,process.env.JWT_SECRET);req.user=await User.findById(decoded.id).select('-password');next();};
+
+export const protect = async (req, res, next) => {
+  try {
+    const bearer = req.headers.authorization || '';
+    const token = bearer.startsWith('Bearer ') ? bearer.slice(7) : null;
+
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized: token missing' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select('-password');
+
+    if (!user) {
+      return res.status(401).json({ message: 'Unauthorized: user not found' });
+    }
+
+    req.user = user;
+    return next();
+  } catch {
+    return res.status(401).json({ message: 'Unauthorized: invalid or expired token' });
+  }
+};
