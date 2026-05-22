@@ -104,3 +104,20 @@ If your server crashes with `OpenAIError: The OPENAI_API_KEY environment variabl
 4. On Windows, make sure the filename is exactly `.env` (not `.env.txt`).
 
 The backend now starts even if the key is missing and returns a clear API error message until you add the key.
+
+
+## Troubleshooting: Chat API returns 500
+If browser shows `POST /api/chat 500`, check these in order:
+
+1. Confirm you are logged in (token exists in browser localStorage).
+2. Confirm `server/.env` has a valid `OPENAI_API_KEY`.
+3. Confirm your OpenAI account has quota/billing enabled.
+4. Test backend directly:
+   - `GET http://localhost:5000/api` should return API info.
+   - `GET http://localhost:5000/api/health` should return status ok.
+5. Look at server console for the exact message returned in response body.
+
+Common responses:
+- `401 Unauthorized: token missing` → login again.
+- `401 Unauthorized: invalid or expired token` → logout/login.
+- `OPENAI_API_KEY is missing...` → add key to `server/.env` and restart.
