@@ -29,7 +29,10 @@ server/ ...
 - MONGODB_URI=...
 - JWT_SECRET=...
 - OPENAI_API_KEY=...
+- OPENAI_ORG_ID=org_xxx (optional)
 - OPENAI_MODEL=gpt-4o-mini
+- OPENAI_TIMEOUT_MS=30000
+- OPENAI_MAX_RETRIES=3
 - CLIENT_URL=https://your-frontend-domain.vercel.app
 
 ### client/.env
@@ -139,3 +142,12 @@ Fix steps:
 Quick check command (inside `server/`):
 - Windows PowerShell: `Get-Content .env`
 - CMD: `type .env`
+
+
+## Quota (429) handling
+- Backend now retries transient OpenAI failures with exponential backoff.
+- If quota is exhausted, API returns clear message: `OpenAI quota exceeded...` with HTTP 429.
+- Fix by enabling billing/credits in OpenAI dashboard and retrying.
+
+## Security note
+- Never commit real MongoDB URI, JWT secret, or OpenAI API keys. Rotate leaked keys immediately.
