@@ -124,3 +124,18 @@ Common responses:
 
 - `429 OpenAI quota exceeded...` → add billing/credits in OpenAI dashboard and retry.
 - `401 OpenAI API key is invalid...` → replace key in `server/.env` and restart server.
+
+
+## Troubleshooting: `MONGODB_URI` undefined on startup
+If server shows:
+`Failed to start server: The `uri` parameter to `openUri()` must be a string, got "undefined"`
+
+Fix steps:
+1. Create `server/.env` in the same folder as `server.js`.
+2. Add `MONGODB_URI=<your mongodb atlas connection string>`.
+3. Keep other required keys too: `JWT_SECRET`, `OPENAI_API_KEY`, `CLIENT_URL`.
+4. Restart server: `npm run dev`.
+
+Quick check command (inside `server/`):
+- Windows PowerShell: `Get-Content .env`
+- CMD: `type .env`
